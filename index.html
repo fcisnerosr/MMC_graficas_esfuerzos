@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Esfuerzos en el punto A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Portada: tres tarjetas, una por gráfica, con el enunciado arriba. */
+:root{--bg:#e8ebf0;--panel:#ffffff;--panel-2:#f3f5f8;--fg:#1b2130;--muted:#5a6375;--line:#d3d8e1;--accent:#c2410c;--accent-soft:rgba(194,65,12,.12);--comp:#1f5fd0;--tens:#c62828;--shear:#0b8f70;
+  --font-ui:"IBM Plex Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif;--font-mono:"IBM Plex Mono",SFMono-Regular,Consolas,"Liberation Mono",monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141720;--panel:#1b1f29;--panel-2:#222733;--fg:#e6e9ef;--muted:#98a1b1;--line:#333a48;--accent:#fb923c;--accent-soft:rgba(251,146,60,.16);--comp:#6aa6ff;--tens:#ff7b7b;--shear:#3ad0a8;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141720;--panel:#1b1f29;--panel-2:#222733;--fg:#e6e9ef;--muted:#98a1b1;--line:#333a48;--accent:#fb923c;--accent-soft:rgba(251,146,60,.16);--comp:#6aa6ff;--tens:#ff7b7b;--shear:#3ad0a8;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 var(--font-ui);padding-block:40px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:860px;margin:0 auto}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+h1{font-size:30px;line-height:1.15;margin:6px 0 12px;text-wrap:balance;font-weight:600}
+p{margin:0 0 10px;max-width:65ch}
+.pide{background:var(--accent-soft);border-left:3px solid var(--accent);padding:12px 14px;border-radius:0 8px 8px 0;margin:16px 0 26px}
+.datos{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;margin:0 0 26px;font-size:14px}
+.datos dt{color:var(--muted)} .datos dd{margin:0;font-family:var(--font-mono);font-size:13px}
+.tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.tarjeta{display:block;text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;border-top:4px solid var(--c)}
+.tarjeta:hover,.tarjeta:focus-visible{border-color:var(--c);outline:none;box-shadow:0 0 0 2px var(--c)}
+.tarjeta .n{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.tarjeta h2{font-size:18px;margin:4px 0 8px;font-weight:600}
+.tarjeta .r{font:600 20px/1.2 var(--font-mono);color:var(--c);margin:0 0 8px}
+.tarjeta p{font-size:13.5px;color:var(--muted);margin:0}
+.nota{font-size:13px;color:var(--muted);margin-top:26px}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">Mecánica de materiales · Repaso de estado de esfuerzos</div>
+<h1>Esfuerzos en el punto A de una viga simplemente apoyada</h1>
+<p>Tres gráficas 3D interactivas del mismo problema. En cada una puedes girar la viga, acercarte, ver la sección por dentro y prender o apagar capas.</p>
+<div class="pide"><b>Enunciado.</b> Calcula el esfuerzo cortante y a flexión de la siguiente viga simplemente apoyada en los puntos que se indican. El punto A está en el corte 1 (x = 1.2 m), 0.20 m arriba del eje neutro y al centro del ancho de la sección.</div>
+<dl class="datos">
+<dt>Viga</dt><dd>simplemente apoyada, L = 4 m</dd>
+<dt>Carga</dt><dd>w = 10 kN/m uniforme</dd>
+<dt>Sección</dt><dd>rectangular, b = 0.30 m, h = 0.60 m</dd>
+<dt>En el corte</dt><dd>V = 8 kN, M = 16.8 kN·m, I = 5.4 × 10⁻³ m⁴</dd>
+</dl>
+<div class="tarjetas">
+<a class="tarjeta" href="01_flexion_3D.html" style="--c:var(--comp)"><div class="n">Gráfica 1</div><h2>Esfuerzo por flexión</h2><div class="r">σ<sub>A</sub> = 0.62 MPa</div><p>Distribución lineal de σ sobre la sección del corte: compresión arriba del eje neutro, tensión abajo, y la flecha de A.</p></a>
+<a class="tarjeta" href="02_cortante_3D.html" style="--c:var(--shear)"><div class="n">Gráfica 2</div><h2>Esfuerzo cortante</h2><div class="r">τ<sub>A</sub> = 37 kPa</div><p>Parábola de τ sobre la sección, el área A′ que entra en Q y la dirección real del cortante en A.</p></a>
+<a class="tarjeta" href="03_estado_de_esfuerzos_3D.html" style="--c:var(--accent)"><div class="n">Gráfica 3</div><h2>Estado de esfuerzos</h2><div class="r">σ<sub>x</sub>, τ<sub>xy</sub> en A</div><p>Elemento diferencial en A, amplificado, con los dos esfuerzos sobre sus caras.</p></a>
+</div>
+<p class="nota">Las páginas funcionan también descargadas, sin internet. Arrastra para girar, rueda o dos dedos para acercar, clic derecho para desplazar.</p>
+</main>
+</body>
+</html>
