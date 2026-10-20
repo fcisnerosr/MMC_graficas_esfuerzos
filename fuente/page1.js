@@ -1,10 +1,10 @@
 
 /* ===================== Flexión: distribución de σ en el corte 1 ===================== */
 const kS = 0.55 / P.sigmaMax;                       // metros de flecha por pascal
-const gFlechas = capa('flechas', new THREE.Group()); scene.add(gFlechas);
-const gEnv = capa('envolvente', new THREE.Group()); scene.add(gEnv);
-const gM = capa('momento', new THREE.Group()); scene.add(gM);
-const gSigmaA = new THREE.Group(); scene.add(gSigmaA);   // siempre visible: el resultado
+const gFlechas = capa('flechas', new THREE.Group()); gSec.add(gFlechas);
+const gEnv = capa('envolvente', new THREE.Group()); gSec.add(gEnv);
+const gM = capa('momento', new THREE.Group()); gSec.add(gM);
+const gSigmaA = new THREE.Group(); gSec.add(gSigmaA);   // siempre visible: el resultado
 
 const ys = []; for (let i = -6; i <= 6; i++) ys.push(Math.round(i * 5) / 100);
 for (const y of ys) for (const z of [-0.1, 0, 0.1]) {

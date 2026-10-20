@@ -7,9 +7,9 @@ etiquetas.splice(etiquetas.indexOf(etW), 1); etW.el.remove();   // aquí la viga
 const cubo = caja(C.x - S / 2, C.x + S / 2, C.y - S / 2, C.y + S / 2, C.z - S / 2, C.z + S / 2, matStd('--beam'));
 gCubo.add(cubo, bordes(cubo, '--beam-edge'));
 const matZoom = matGuion('--accent', { dashSize: 0.05, gapSize: 0.03, transparent: true, opacity: 0.85 });
-gCubo.add(linea([posA, V3(C.x - S / 2, C.y - S / 2, C.z - S / 2)], matZoom));
-gCubo.add(linea([posA, V3(C.x - S / 2, C.y + S / 2, C.z - S / 2)], matZoom));
-gCubo.add(linea([posA, V3(C.x - S / 2, C.y - S / 2, C.z + S / 2)], matZoom));
+const esquinas = [V3(C.x - S / 2, C.y - S / 2, C.z - S / 2), V3(C.x - S / 2, C.y + S / 2, C.z - S / 2), V3(C.x - S / 2, C.y - S / 2, C.z + S / 2)];
+const lineasZoom = esquinas.map(e => { const l = linea([posA, e], matZoom); gCubo.add(l); return { l, e }; });
+alDeformar.push(() => { const a = gSec.localToWorld(posA.clone()); for (const z of lineasZoom) reponerLinea(z.l, [a, z.e]); });
 etiqueta('Elemento en A (amplificado)', V3(C.x, C.y + S / 2, C.z), { ancla: 'b', dy: -12, cls: 'a big', grupo: gCubo });
 etiqueta('cara libre: σ<sub>z</sub> = 0', V3(C.x, C.y - 0.17, C.z + S / 2), { ancla: 'c', cls: 'dim', grupo: gCubo });
 

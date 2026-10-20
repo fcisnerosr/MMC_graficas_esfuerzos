@@ -188,7 +188,9 @@ def segs(izq='solido', der='transparente'):
         ops = ''.join(f'<option value="{v}"{" selected" if v==val else ""}>{t}</option>' for v, t in (('solido','Sólido'),('transparente','Transparente'),('oculto','Oculto')))
         return f'<select id="{id_}" data-seg="{seg}">{ops}</select>'
     return ('<div class="segs"><label for="segIzq">Tramo izquierdo (0 a 1.2 m)</label>' + sel('segIzq','izq',izq)
-            + '<label for="segDer">Tramo derecho (1.2 a 4 m)</label>' + sel('segDer','der',der) + '</div>')
+            + '<label for="segDer">Tramo derecho (1.2 a 4 m)</label>' + sel('segDer','der',der)
+            + '<label for="deformada">Deformada (exagerada)</label><div class="rango"><input type="range" id="deformada" min="0" max="0.30" step="0.01" value="0.10" aria-describedby="nota-def"><output id="deformadaVal" for="deformada">0.10 m</output></div></div>'
+            + '<p class="nota" id="nota-def">La viga se dibuja con su curva elástica exagerada (flecha máxima de 0.10 m por omisión) solo para ver cómo flexiona; la deformación real es de milímetros. En 0 queda recta.</p>')
 
 def capas(items):
     return '<div class="capas">' + ''.join(f'<label><input type="checkbox" id="capa-{k}" data-capa="{k}"{" checked" if on else ""}> {t}</label>' for k, t, on in items) + '</div>'
@@ -212,7 +214,7 @@ PANEL1 = f'''
 <div class="eyebrow">Mecánica de materiales · Repaso de estado de esfuerzos</div>
 <h1>Esfuerzo por flexión en el punto A</h1>
 {ENUNCIADO}
-<div class="pide"><b>Qué muestra esta gráfica.</b> El esfuerzo normal por flexión σ en el <b>punto A</b>: corte 1 a x = 1.2 m del apoyo izquierdo, 0.20 m arriba del eje neutro y exactamente al centro del ancho de la sección (a 0.15 m de cada cara lateral). La viga está cortada en x = 1.2 m y el tramo derecho se vuelve transparente para ver cómo se reparte σ sobre la sección: las flechas azules empujan contra la cara (compresión), las rojas jalan (tensión), y la flecha naranja es la de A.</div>
+<div class="pide"><b>Qué muestra esta gráfica.</b> El esfuerzo normal por flexión σ en el <b>punto A</b>: corte 1 a x = 1.2 m del apoyo izquierdo, 0.20 m arriba del eje neutro y exactamente al centro del ancho de la sección (a 0.15 m de cada cara lateral). La viga está cortada en x = 1.2 m y el tramo derecho se vuelve transparente para ver cómo se reparte σ sobre la sección: las flechas rojas empujan contra la cara (compresión), las azules jalan (tensión), y la flecha naranja es la de A.</div>
 {NAV(1)}
 <h2>Capas</h2>
 {capas([('flechas','Flechas de σ sobre la sección',True),('envolvente','Envolvente (prismas de σ)',True),('momento','Momento interno M',True),('cotasA','Acotaciones de A',True),('carga','Carga y reacciones',True),('cotas','Acotaciones generales',True),('B','Punto B (corte 2, x = 2.4 m)',False),('ejes','Ejes x, y, z',False)])}
@@ -231,8 +233,8 @@ PANEL1 = f'''
 <div class="fig">{svg_diagrama('M')}</div>
 <h2>Cómo leer la gráfica 3D</h2>
 <ul class="leyenda">
-<li>{sw('--comp')}<span>Flechas azules: compresión. Apuntan hacia la cara del corte y crecen linealmente desde el EN hasta la fibra superior.</span></li>
-<li>{sw('--tens')}<span>Flechas rojas: tensión. Salen de la cara y crecen hacia la fibra inferior.</span></li>
+<li>{sw('--comp')}<span>Flechas rojas: compresión. Apuntan hacia la cara del corte y crecen linealmente desde el EN hasta la fibra superior.</span></li>
+<li>{sw('--tens')}<span>Flechas azules: tensión. Salen de la cara y crecen hacia la fibra inferior.</span></li>
 <li>{sw('--accent')}<span>Flecha y esfera naranjas: el punto A y su esfuerzo σ<sub>A</sub>. La longitud de cada flecha es proporcional a σ (0.93 MPa = 0.55 m de dibujo).</span></li>
 <li>{sw('--load')}<span>Flecha curva: el momento interno M = 16.8 kN·m que actúa en la cara del corte.</span></li>
 </ul>

@@ -3,7 +3,7 @@
   --bg:#e8ebf0; --panel:#ffffff; --panel-2:#f3f5f8; --fg:#1b2130; --muted:#5a6375; --line:#d3d8e1;
   --lbl-bg:rgba(255,255,255,.92);
   --accent:#c2410c; --accent-soft:rgba(194,65,12,.12);
-  --comp:#1f5fd0; --tens:#c62828; --shear:#0b8f70;
+  --comp:#c62828; --tens:#1f5fd0; --shear:#0b8f70;
   --beam:#d6d1c6; --beam-edge:#3f3f3d; --support:#6a6e78; --load:#3f4756; --dim:#6b7280;
   --font-ui:"IBM Plex Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --font-mono:"IBM Plex Mono",SFMono-Regular,Consolas,"Liberation Mono",monospace;
@@ -12,13 +12,13 @@
   :root:not([data-theme="light"]){
     --bg:#141720; --panel:#1b1f29; --panel-2:#222733; --fg:#e6e9ef; --muted:#98a1b1; --line:#333a48;
     --lbl-bg:rgba(27,31,41,.92); --accent:#fb923c; --accent-soft:rgba(251,146,60,.16);
-    --comp:#6aa6ff; --tens:#ff7b7b; --shear:#3ad0a8;
+    --comp:#ff7b7b; --tens:#6aa6ff; --shear:#3ad0a8;
     --beam:#8b887f; --beam-edge:#e3e0d8; --support:#a3a8b3; --load:#d3d8e2; --dim:#a3abba; color-scheme:dark }
 }
 :root[data-theme="dark"]{
   --bg:#141720; --panel:#1b1f29; --panel-2:#222733; --fg:#e6e9ef; --muted:#98a1b1; --line:#333a48;
   --lbl-bg:rgba(27,31,41,.92); --accent:#fb923c; --accent-soft:rgba(251,146,60,.16);
-  --comp:#6aa6ff; --tens:#ff7b7b; --shear:#3ad0a8;
+  --comp:#ff7b7b; --tens:#6aa6ff; --shear:#3ad0a8;
   --beam:#8b887f; --beam-edge:#e3e0d8; --support:#a3a8b3; --load:#d3d8e2; --dim:#a3abba; color-scheme:dark }
 
 *{box-sizing:border-box}
@@ -59,6 +59,9 @@ p{margin:0 0 8px}
 .capas label{display:flex;gap:6px;align-items:flex-start;cursor:pointer}
 .capas input{margin-top:3px}
 .segs{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center;font-size:13px;margin-top:10px}
+.rango{display:flex;gap:8px;align-items:center;min-width:0}
+.rango input{flex:1;min-width:0;accent-color:var(--accent)}
+.rango output{font:12.5px var(--font-mono);white-space:nowrap;color:var(--accent)}
 select{font:13px var(--font-ui);padding:4px 6px;border-radius:6px;border:1px solid var(--line);background:var(--panel-2);color:var(--fg)}
 .datos{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:13px;margin:0}
 .datos dt{color:var(--muted)} .datos dd{margin:0;font-family:var(--font-mono);font-size:12.5px}

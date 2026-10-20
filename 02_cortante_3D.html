@@ -12,7 +12,7 @@
   --bg:#e8ebf0; --panel:#ffffff; --panel-2:#f3f5f8; --fg:#1b2130; --muted:#5a6375; --line:#d3d8e1;
   --lbl-bg:rgba(255,255,255,.92);
   --accent:#c2410c; --accent-soft:rgba(194,65,12,.12);
-  --comp:#1f5fd0; --tens:#c62828; --shear:#0b8f70;
+  --comp:#c62828; --tens:#1f5fd0; --shear:#0b8f70;
   --beam:#d6d1c6; --beam-edge:#3f3f3d; --support:#6a6e78; --load:#3f4756; --dim:#6b7280;
   --font-ui:"IBM Plex Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --font-mono:"IBM Plex Mono",SFMono-Regular,Consolas,"Liberation Mono",monospace;
@@ -21,13 +21,13 @@
   :root:not([data-theme="light"]){
     --bg:#141720; --panel:#1b1f29; --panel-2:#222733; --fg:#e6e9ef; --muted:#98a1b1; --line:#333a48;
     --lbl-bg:rgba(27,31,41,.92); --accent:#fb923c; --accent-soft:rgba(251,146,60,.16);
-    --comp:#6aa6ff; --tens:#ff7b7b; --shear:#3ad0a8;
+    --comp:#ff7b7b; --tens:#6aa6ff; --shear:#3ad0a8;
     --beam:#8b887f; --beam-edge:#e3e0d8; --support:#a3a8b3; --load:#d3d8e2; --dim:#a3abba; color-scheme:dark }
 }
 :root[data-theme="dark"]{
   --bg:#141720; --panel:#1b1f29; --panel-2:#222733; --fg:#e6e9ef; --muted:#98a1b1; --line:#333a48;
   --lbl-bg:rgba(27,31,41,.92); --accent:#fb923c; --accent-soft:rgba(251,146,60,.16);
-  --comp:#6aa6ff; --tens:#ff7b7b; --shear:#3ad0a8;
+  --comp:#ff7b7b; --tens:#6aa6ff; --shear:#3ad0a8;
   --beam:#8b887f; --beam-edge:#e3e0d8; --support:#a3a8b3; --load:#d3d8e2; --dim:#a3abba; color-scheme:dark }
 
 *{box-sizing:border-box}
@@ -68,6 +68,9 @@ p{margin:0 0 8px}
 .capas label{display:flex;gap:6px;align-items:flex-start;cursor:pointer}
 .capas input{margin-top:3px}
 .segs{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center;font-size:13px;margin-top:10px}
+.rango{display:flex;gap:8px;align-items:center;min-width:0}
+.rango input{flex:1;min-width:0;accent-color:var(--accent)}
+.rango output{font:12.5px var(--font-mono);white-space:nowrap;color:var(--accent)}
 select{font:13px var(--font-ui);padding:4px 6px;border-radius:6px;border:1px solid var(--line);background:var(--panel-2);color:var(--fg)}
 .datos{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:13px;margin:0}
 .datos dt{color:var(--muted)} .datos dd{margin:0;font-family:var(--font-mono);font-size:12.5px}
@@ -123,7 +126,7 @@ select{font:13px var(--font-ui);padding:4px 6px;border-radius:6px;border:1px sol
 <nav class="nav" aria-label="Las tres gráficas"><a href="01_flexion_3D.html">1 · Flexión</a><a href="02_cortante_3D.html" aria-current="page">2 · Cortante</a><a href="03_estado_de_esfuerzos_3D.html">3 · Estado de esfuerzos</a></nav>
 <h2>Capas</h2>
 <div class="capas"><label><input type="checkbox" id="capa-parabola" data-capa="parabola" checked> Parábola de τ (magnitud)</label><label><input type="checkbox" id="capa-tallos" data-capa="tallos" checked> Tallos: τ a cada altura</label><label><input type="checkbox" id="capa-direccion" data-capa="direccion" checked> Dirección de τ sobre la cara</label><label><input type="checkbox" id="capa-areaQ" data-capa="areaQ" checked> Área A′ para Q y su centroide</label><label><input type="checkbox" id="capa-planoA" data-capa="planoA"> Plano horizontal en A (τ longitudinal)</label><label><input type="checkbox" id="capa-cortante" data-capa="cortante" checked> Cortante interno V</label><label><input type="checkbox" id="capa-cotasA" data-capa="cotasA" checked> Acotaciones de A</label><label><input type="checkbox" id="capa-carga" data-capa="carga" checked> Carga y reacciones</label><label><input type="checkbox" id="capa-cotas" data-capa="cotas" checked> Acotaciones generales</label><label><input type="checkbox" id="capa-B" data-capa="B"> Punto B (corte 2, x = 2.4 m)</label><label><input type="checkbox" id="capa-ejes" data-capa="ejes"> Ejes x, y, z</label></div>
-<div class="segs"><label for="segIzq">Tramo izquierdo (0 a 1.2 m)</label><select id="segIzq" data-seg="izq"><option value="solido" selected>Sólido</option><option value="transparente">Transparente</option><option value="oculto">Oculto</option></select><label for="segDer">Tramo derecho (1.2 a 4 m)</label><select id="segDer" data-seg="der"><option value="solido">Sólido</option><option value="transparente" selected>Transparente</option><option value="oculto">Oculto</option></select></div>
+<div class="segs"><label for="segIzq">Tramo izquierdo (0 a 1.2 m)</label><select id="segIzq" data-seg="izq"><option value="solido" selected>Sólido</option><option value="transparente">Transparente</option><option value="oculto">Oculto</option></select><label for="segDer">Tramo derecho (1.2 a 4 m)</label><select id="segDer" data-seg="der"><option value="solido">Sólido</option><option value="transparente" selected>Transparente</option><option value="oculto">Oculto</option></select><label for="deformada">Deformada (exagerada)</label><div class="rango"><input type="range" id="deformada" min="0" max="0.30" step="0.01" value="0.10" aria-describedby="nota-def"><output id="deformadaVal" for="deformada">0.10 m</output></div></div><p class="nota" id="nota-def">La viga se dibuja con su curva elástica exagerada (flecha máxima de 0.10 m por omisión) solo para ver cómo flexiona; la deformación real es de milímetros. En 0 queda recta.</p>
 <h2>Datos</h2>
 <dl class="datos"><dt>Viga</dt><dd>simplemente apoyada, L = 4 m</dd><dt>Carga</dt><dd>w = 10 kN/m uniforme en toda la longitud</dd><dt>Sección</dt><dd>rectangular, b = 0.30 m, h = 0.60 m</dd><dt>Corte 1</dt><dd>x = 1.2 m desde el apoyo izquierdo</dd><dt>Punto A</dt><dd>y = +0.20 m (arriba del EN), z = 0 (centro del ancho)</dd><dt>Reacciones</dt><dd>R = wL/2 = 20 kN en cada apoyo</dd></dl>
 <h2>Cálculo</h2>
@@ -1262,6 +1265,7 @@ function bordes(mesh, token, opacidad) {
 }
 function linea(pts, mat) { const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat); if (mat.isLineDashedMaterial) l.computeLineDistances(); return l; }
 function lineaCerrada(pts, mat) { return linea(pts.concat([pts[0]]), mat); }
+function reponerLinea(l, pts) { l.geometry.dispose(); l.geometry = new THREE.BufferGeometry().setFromPoints(pts); if (l.material.isLineDashedMaterial) l.computeLineDistances(); }
 function flecha(desde, hasta, mat, r, hl) {
   r = r || 0.008;
   const dir = new THREE.Vector3().subVectors(hasta, desde); const len = dir.length(); dir.normalize();
@@ -1300,7 +1304,8 @@ function prisma(pts2d, mat) {
   return new THREE.Mesh(g, mat);
 }
 
-/* ===================== Etiquetas HTML proyectadas ===================== */
+/* ===================== Etiquetas HTML proyectadas =====================
+   `pos` se da en coordenadas del `grupo` (si el grupo se mueve con la deformada, la etiqueta lo sigue). */
 const capaEtiquetas = document.getElementById('etiquetas');
 const etiquetas = [];
 const ANCLA = { c: ['-50%', '-50%'], l: ['0%', '-50%'], r: ['-100%', '-50%'], t: ['-50%', '0%'], b: ['-50%', '-100%'], tl: ['0%', '0%'], tr: ['-100%', '0%'], bl: ['0%', '-100%'], br: ['-100%', '-100%'] };
@@ -1317,7 +1322,7 @@ function actualizarEtiquetas() {
   const W = vista.clientWidth, H = vista.clientHeight;
   for (const e of etiquetas) {
     if (e.grupo && !visibleEnCadena(e.grupo)) { e.el.style.display = 'none'; continue; }
-    _v.copy(e.pos).project(camera);
+    _v.copy(e.pos); if (e.grupo) e.grupo.localToWorld(_v); _v.project(camera);
     if (_v.z > 1 || _v.z < -1) { e.el.style.display = 'none'; continue; }
     const x = (_v.x * 0.5 + 0.5) * W + e.dx, y = (-_v.y * 0.5 + 0.5) * H + e.dy;
     if (x < -400 || x > W + 400 || y < -100 || y > H + 100) { e.el.style.display = 'none'; continue; }
@@ -1362,11 +1367,45 @@ const capas = {};
 function capa(n, o) { capas[n] = o; return o; }
 let alCambiarCapa = null;
 
+/* ===================== Deformada aproximada (curva elástica, exagerada) =====================
+   Viga simplemente apoyada con carga uniforme: v(x) = -(w x / 24EI)(L³ - 2Lx² + x³).
+   Se dibuja normalizada a una flecha máxima DELTA (metros de dibujo); la real es de milímetros. */
+let DELTA = 0.10;
+const vDef = x => { const k = x / P.L; return -DELTA * 3.2 * k * (1 - 2 * k * k + k * k * k); };
+const vPend = x => { const k = x / P.L; return -DELTA * 3.2 * (1 - 6 * k * k + 4 * k * k * k) / P.L; };
+const doblables = [];           // geometrías en coordenadas de mundo que se doblan vértice a vértice
+function registrarDoblable(geom) { geom.userData.orig = geom.attributes.position.array.slice(); doblables.push(geom); return geom; }
+const alDeformar = [];          // funciones que se corren después de doblar
+/* La sección del corte se mueve como cuerpo rígido: baja v(xc) y gira la pendiente v'(xc).
+   Todo lo que vive en la cara del corte se cuelga de gSec (coordenadas de mundo sin deformar). */
+function seccionMovil(x) {
+  const ext = new THREE.Group(); ext.position.x = x; scene.add(ext);
+  const int = new THREE.Group(); int.position.x = -x; ext.add(int);
+  alDeformar.push(() => { ext.position.set(x, vDef(x), 0); ext.rotation.z = vPend(x); ext.updateMatrixWorld(true); });
+  return int;
+}
+const gSec = seccionMovil(P.xc);
+const gSecB = seccionMovil(P.xB);
+function deformar(delta) {
+  DELTA = delta;
+  for (const g of doblables) {
+    const o = g.userData.orig, p = g.attributes.position.array;
+    for (let i = 0; i < o.length; i += 3) { const X = o[i], Y = o[i + 1]; p[i] = X - Y * vPend(X); p[i + 1] = Y + vDef(X); p[i + 2] = o[i + 2]; }
+    g.attributes.position.needsUpdate = true; g.computeVertexNormals(); g.computeBoundingSphere();
+  }
+  for (const f of alDeformar) f();
+}
+
 /* ===================== La viga en dos tramos (para ver por dentro) ===================== */
 const viga = capa('viga', new THREE.Group()); scene.add(viga);
 function segmento(x0, x1, mat) {
-  const m = caja(x0, x1, -P.h / 2, P.h / 2, -P.b / 2, P.b / 2, mat); const e = bordes(m, '--beam-edge');
-  const g = new THREE.Group(); g.add(m, e); viga.add(g); return { mesh: m, bordes: e, grupo: g };
+  const geom = new THREE.BoxGeometry(x1 - x0, P.h, P.b, Math.max(8, Math.round((x1 - x0) * 16)), 1, 1);
+  geom.translate((x0 + x1) / 2, 0, 0); registrarDoblable(geom);
+  const m = new THREE.Mesh(geom, mat); const e = bordes(m, '--beam-edge');
+  const g = new THREE.Group(); g.add(m, e); viga.add(g);
+  const seg = { mesh: m, bordes: e, grupo: g };
+  alDeformar.push(() => { e.geometry.dispose(); e.geometry = new THREE.EdgesGeometry(geom, 20); });
+  return seg;
 }
 const segIzq = segmento(0, P.xc, matViga), segDer = segmento(P.xc, P.L, matVigaDer);
 function modoSegmento(seg, modo) {
@@ -1378,11 +1417,13 @@ function modoSegmento(seg, modo) {
   seg.bordes.material.opacity = modo === 'transparente' ? 0.45 : 0.9;
 }
 
-/* Eje neutro: línea de raya y punto sobre la cara frontal, y sobre la cara del corte */
+/* Eje neutro: línea de raya y punto sobre la cara frontal (sigue la deformada) y sobre la cara del corte */
 const gEN = new THREE.Group(); scene.add(gEN);
-gEN.add(linea([V3(0, 0, P.b / 2 + 0.003), V3(P.L, 0, P.b / 2 + 0.003)], matGuion('--dim', { dashSize: 0.12, gapSize: 0.05, transparent: true, opacity: 0.9 })));
+const puntosEN = () => { const pts = []; for (let i = 0; i <= 48; i++) { const x = i * P.L / 48; pts.push(V3(x, vDef(x), P.b / 2 + 0.003)); } return pts; };
+const lineaEN = linea(puntosEN(), matGuion('--dim', { dashSize: 0.12, gapSize: 0.05, transparent: true, opacity: 0.9 })); gEN.add(lineaEN);
+alDeformar.push(() => reponerLinea(lineaEN, puntosEN()));
 etiqueta('EN', V3(0, 0, P.b / 2), { ancla: 'r', dx: -8, cls: 'dim', grupo: gEN });
-gEN.add(linea([V3(P.xc + 0.004, 0, -P.b / 2), V3(P.xc + 0.004, 0, P.b / 2)], matGuion('--dim', { dashSize: 0.04, gapSize: 0.02, transparent: true, opacity: 0.9 })));
+gSec.add(linea([V3(P.xc + 0.004, 0, -P.b / 2), V3(P.xc + 0.004, 0, P.b / 2)], matGuion('--dim', { dashSize: 0.04, gapSize: 0.02, transparent: true, opacity: 0.9 })));
 
 /* Apoyos */
 function apoyo(x, tipo) {
@@ -1399,12 +1440,16 @@ function apoyo(x, tipo) {
 }
 viga.add(apoyo(0, 'pasador'), apoyo(P.L, 'rodillo'));
 
-/* Carga distribuida y reacciones */
+/* Carga distribuida (sigue la cara superior deformada) y reacciones */
 const gCarga = capa('carga', new THREE.Group()); scene.add(gCarga);
-const yTop = P.h / 2;
-for (let i = 0; i <= 16; i++) { const x = i * 0.25; gCarga.add(flecha(V3(x, yTop + 0.36, 0), V3(x, yTop + 0.012, 0), matCarga, 0.005, 0.06)); }
-gCarga.add(linea([V3(0, yTop + 0.36, 0), V3(P.L, yTop + 0.36, 0)], matLinea('--load')));
-const etW = etiqueta('w = 10 kN/m', V3(P.L / 2, yTop + 0.36, 0), { ancla: 'b', dy: -6, grupo: gCarga, cls: 'titulo' });
+const yTop = P.h / 2, yW = yTop + 0.36;
+const flechasCarga = [];
+for (let i = 0; i <= 16; i++) { const x = i * 0.25; const f = flecha(V3(x, yW, 0), V3(x, yTop + 0.012, 0), matCarga, 0.005, 0.06); gCarga.add(f); flechasCarga.push({ f, x }); }
+const puntosCarga = () => { const pts = []; for (let i = 0; i <= 48; i++) { const x = i * P.L / 48; pts.push(V3(x, yW + vDef(x), 0)); } return pts; };
+const lineaCarga = linea(puntosCarga(), matLinea('--load')); gCarga.add(lineaCarga);
+const pivW = new THREE.Object3D(); pivW.position.set(P.L / 2, yW, 0); gCarga.add(pivW);
+const etW = etiqueta('w = 10 kN/m', V3(0, 0, 0), { ancla: 'b', dy: -6, grupo: pivW, cls: 'titulo' });
+alDeformar.push(() => { for (const c of flechasCarga) c.f.position.y = yW + vDef(c.x); reponerLinea(lineaCarga, puntosCarga()); pivW.position.y = yW + vDef(P.L / 2); });
 for (const x of [0, P.L]) {
   gCarga.add(flecha(V3(x, -P.h / 2 - 0.68, 0), V3(x, -P.h / 2 - 0.3, 0), matCarga, 0.009, 0.08));
   etiqueta('R = 20 kN', V3(x, -P.h / 2 - 0.5, 0), { ancla: 'l', dx: 12, grupo: gCarga });
@@ -1423,20 +1468,20 @@ const gCotas = capa('cotas', new THREE.Group()); scene.add(gCotas);
   gCotas.add(cota(V3(P.L + 0.02, P.h / 2 + 0.14, -P.b / 2), V3(P.L + 0.02, P.h / 2 + 0.14, P.b / 2), 'b = 0.30 m', { tic: V3(0, 0.03, 0), ancla: 'b', dy: -6 }));
 })();
 
-/* Marco del corte 1 */
-const gCorte = new THREE.Group(); scene.add(gCorte);
+/* Marco del corte 1 (se mueve con la sección) */
+const gCorte = new THREE.Group(); gSec.add(gCorte);
 const MG = P.b / 2 + 0.08, MH = P.h / 2 + 0.08;
 gCorte.add(lineaCerrada([V3(P.xc, -MH, -MG), V3(P.xc, MH, -MG), V3(P.xc, MH, MG), V3(P.xc, -MH, MG)], matGuion('--accent', { dashSize: 0.06, gapSize: 0.035 })));
 etiqueta('Corte 1 · x = 1.2 m', V3(P.xc, MH, 0), { ancla: 'b', dy: -6, cls: 'a', grupo: gCorte });
 
 /* Punto A: esfera al centro del ancho, 0.20 m arriba del EN */
 const posA = V3(P.xc + 0.006, P.yA, P.zA);
-const gA = new THREE.Group(); scene.add(gA);
+const gA = new THREE.Group(); gSec.add(gA);
 gA.add(esfera(posA, 0.024, matAcento));
 etiqueta('Punto A', posA, { ancla: 'r', dx: -14, dy: 12, cls: 'a big', grupo: gA });
 
 /* Acotaciones del punto A sobre la cara del corte */
-const gCotasA = capa('cotasA', new THREE.Group()); scene.add(gCotasA);
+const gCotasA = capa('cotasA', new THREE.Group()); gSec.add(gCotasA);
 (function () {
   const xf = P.xc + 0.004;
   gCotasA.add(cota(V3(xf, 0, 0.055), V3(xf, P.yA, 0.055), '0.20 m sobre el EN', { mat: matLineaAcento, tic: V3(0, 0, 0.025), ancla: 'l', dx: 10, dy: 0, cls: 'dim a' }));
@@ -1444,7 +1489,7 @@ const gCotasA = capa('cotasA', new THREE.Group()); scene.add(gCotasA);
 })();
 
 /* Punto B (corte 2), apagado por omisión */
-const gB = capa('B', new THREE.Group()); scene.add(gB); gB.visible = false;
+const gB = capa('B', new THREE.Group()); gSecB.add(gB); gB.visible = false;
 (function () {
   const posB = V3(P.xB + 0.006, P.yB, 0);
   gB.add(esfera(posB, 0.02, matBrillo('--dim')));
@@ -1468,8 +1513,11 @@ let tween = null;
 const reducirMovimiento = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function irAVista(nombre, instantaneo) {
   const p = presets[nombre]; if (!p) return;
-  const dir = V3(p.dir[0], p.dir[1], p.dir[2]).normalize();
-  const target = V3(p.target[0], p.target[1], p.target[2]);
+  let dir = V3(p.dir[0], p.dir[1], p.dir[2]).normalize();
+  let target = V3(p.target[0], p.target[1], p.target[2]);
+  if (nombre === 'seccion') { // mirar de frente la sección ya deformada (bajada y girada)
+    const th = vPend(P.xc); target = V3(P.xc, vDef(P.xc), 0); dir = V3(Math.cos(th), Math.sin(th), 0.0001);
+  }
   const pos = target.clone().addScaledVector(dir, p.dist);
   if (instantaneo || reducirMovimiento) { camera.position.copy(pos); controls.target.copy(target); controls.update(); tween = null; return; }
   tween = { t0: performance.now(), dur: 750, p0: camera.position.clone(), p1: pos, c0: controls.target.clone(), c1: target };
@@ -1499,19 +1547,22 @@ function iniciar(vistaInicial) {
   });
   document.querySelectorAll('[data-vista]').forEach(b => b.addEventListener('click', () => irAVista(b.dataset.vista)));
   const g = document.getElementById('girar'); if (g) g.addEventListener('change', () => { controls.autoRotate = g.checked; });
+  const r = document.getElementById('deformada'), rv = document.getElementById('deformadaVal');
+  const aplicarDeformada = () => { const d = parseFloat(r.value); deformar(d); if (rv) rv.textContent = d === 0 ? 'recta' : d.toFixed(2) + ' m'; };
+  if (r) { r.addEventListener('input', aplicarDeformada); aplicarDeformada(); } else deformar(DELTA);
   ajustar(); irAVista(vistaInicial, true); requestAnimationFrame(animar);
 }
 
 
 /* ===================== Cortante: distribución de τ en el corte 1 ===================== */
 const kT = 0.55 / P.tauMax;                         // metros de gráfica por pascal
-const gParab = capa('parabola', new THREE.Group()); scene.add(gParab);
-const gTallos = capa('tallos', new THREE.Group()); scene.add(gTallos);
-const gDir = capa('direccion', new THREE.Group()); scene.add(gDir);
-const gQ = capa('areaQ', new THREE.Group()); scene.add(gQ);
+const gParab = capa('parabola', new THREE.Group()); gSec.add(gParab);
+const gTallos = capa('tallos', new THREE.Group()); gSec.add(gTallos);
+const gDir = capa('direccion', new THREE.Group()); gSec.add(gDir);
+const gQ = capa('areaQ', new THREE.Group()); gSec.add(gQ);
 const gPlano = capa('planoA', new THREE.Group()); scene.add(gPlano); gPlano.visible = false;
-const gV = capa('cortante', new THREE.Group()); scene.add(gV);
-const gTauA = new THREE.Group(); scene.add(gTauA);     // siempre visible: el resultado
+const gV = capa('cortante', new THREE.Group()); gSec.add(gV);
+const gTauA = new THREE.Group(); gSec.add(gTauA);     // siempre visible: el resultado
 
 /* parábola de magnitud, extruida a lo ancho (prisma parabólico) */
 const pts = []; for (let i = 0; i <= 48; i++) { const y = -P.h / 2 + i * P.h / 48; pts.push([P.xc + kT * P.tau(y), y]); }
@@ -1548,14 +1599,27 @@ const yC = (P.yA + P.h / 2) / 2;
 gQ.add(esfera(V3(P.xc + 0.006, yC, 0), 0.011, matAcento));
 etiqueta('A′ = 30 × 10 cm · centroide a ȳ = 25 cm del EN', V3(P.xc + 0.006, yC, 0), { ancla: 'l', dx: 10, cls: 'a', grupo: gQ });
 
-/* plano horizontal que pasa por A: ahí actúa el cortante longitudinal (complementario) */
-const plH = new THREE.Mesh(new THREE.PlaneGeometry(P.xc, P.b), matQ); plH.rotation.x = -Math.PI / 2; plH.position.set(P.xc / 2, P.yA, 0); gPlano.add(plH);
-gPlano.add(lineaCerrada([V3(0, P.yA, -P.b / 2), V3(P.xc, P.yA, -P.b / 2), V3(P.xc, P.yA, P.b / 2), V3(0, P.yA, P.b / 2)], matLineaAcento));
+/* plano horizontal que pasa por A: ahí actúa el cortante longitudinal (complementario); se dobla con la viga */
+const geomPlano = new THREE.PlaneGeometry(P.xc, P.b, 24, 1); geomPlano.rotateX(-Math.PI / 2); geomPlano.translate(P.xc / 2, P.yA, 0); registrarDoblable(geomPlano);
+gPlano.add(new THREE.Mesh(geomPlano, matQ));
+const puntosPlano = () => {
+  const pts = [];
+  for (let i = 0; i <= 24; i++) { const x = i * P.xc / 24; pts.push(V3(x - P.yA * vPend(x), P.yA + vDef(x), -P.b / 2)); }
+  for (let i = 24; i >= 0; i--) { const x = i * P.xc / 24; pts.push(V3(x - P.yA * vPend(x), P.yA + vDef(x), P.b / 2)); }
+  pts.push(pts[0].clone()); return pts;
+};
+const contornoPlano = linea(puntosPlano(), matLineaAcento); gPlano.add(contornoPlano);
+const pivotesPlano = [];
+function pivoteEnPlano(x, z) { const o = new THREE.Object3D(); o.position.set(x, P.yA, z); gPlano.add(o); pivotesPlano.push({ o, x, z }); return o; }
 for (const x of [0.12, 0.42, 0.72, 0.98]) for (const z of [-0.08, 0.08]) {
   const len = 0.17 * P.Vx(x) / P.R;
-  gPlano.add(flecha(V3(x, P.yA + 0.005, z), V3(x + len, P.yA + 0.005, z), matCort, 0.005, 0.035));
+  pivoteEnPlano(x, z).add(flecha(V3(0, 0.005, 0), V3(len, 0.005, 0), matCort, 0.005, 0.035));
 }
-etiqueta('τ longitudinal sobre la cara inferior de A′ (complementario de τ<sub>A</sub>; crece hacia el apoyo porque V crece)', V3(0.55, P.yA, P.b / 2), { ancla: 'b', dy: -8, cls: 'shear', grupo: gPlano });
+etiqueta('τ longitudinal en la cara inferior de A′ (complementario de τ<sub>A</sub>)', V3(0, 0, 0), { ancla: 'bl', dx: -10, dy: -8, cls: 'shear', grupo: pivoteEnPlano(0.3, P.b / 2) });
+alDeformar.push(() => {
+  reponerLinea(contornoPlano, puntosPlano());
+  for (const q of pivotesPlano) { q.o.position.set(q.x - P.yA * vPend(q.x), P.yA + vDef(q.x), q.z); q.o.rotation.z = vPend(q.x); }
+});
 
 /* cortante interno V en el corte */
 const zV = P.b / 2 + 0.24;
